@@ -9,7 +9,7 @@ router.post('/', function (req, res, next) {
   }
   res.set('Set-cookie', 'freeUser=' + freeUser + ';SameSite=None;Secure;domain=.siliconexpert.com;Path=/;Max-Age=86400');
   // res.header('Set-cookie', 'freeUser=123; sameSite:none ;Secure;domain=.siliconexpert.com;Path=/; Max-Age=86400');
-  res.send('{"token":"123"}');
+  res.send({"freeUser":freeUser});
 });
 
 
