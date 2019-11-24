@@ -13,7 +13,7 @@ router.post('/', function (req, res, next) {
         freeUser = req.body['freeUser'];
     }
   res.set('Set-cookie', 'freeUser=' + freeUser + '; sameSite:none ;Secure;domain=.siliconexpert.com;Path=/; Max-Age=86400');
-  res.set('Access-Control-Allow-Origin', 'http://localhost:8080');
+  res.set('Access-Control-Allow-Origin', '*');
   res.set('Access-Control-Allow-Credentials', 'true');
   res.send('{"token":"' + freeUser + '"}');
 });
