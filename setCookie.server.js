@@ -27,6 +27,20 @@ app.use(function(req, res, next) {
   next(createError(404));
 });
 
+app.use(function(req, res, next) {  // Enable cross origin resource sharing (for app frontend)
+  res.header('Access-Control-Allow-Origin', 'http://localhost:8080');
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+
+  // Prevents CORS preflight request (for PUT game_guess) from redirecting
+  if ('OPTIONS' == req.method) {
+    res.send(200);
+  }
+  else {
+    next(); // Passes control to next (Swagger) handler
+  }
+});
+
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
