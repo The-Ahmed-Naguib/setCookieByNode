@@ -10,27 +10,13 @@ var port = 6060;
 
 var app = express();
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'pug');
-
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
-
-app.use('/', usersRouter);
-
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  next(createError(404));
-});
-
 app.use(function(req, res, next) {  // Enable cross origin resource sharing (for app frontend)
-  res.header('Access-Control-Allow-Origin', 'http://localhost:8080');
+  res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,OPTIONS');
   res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,OPTIONS');
+  res.header('Access-Control-Allow-Credentials', 'true');
+  console.log("CORS");
 
   // Prevents CORS preflight request (for PUT game_guess) from redirecting
   if ('OPTIONS' == req.method) {
@@ -39,6 +25,40 @@ app.use(function(req, res, next) {  // Enable cross origin resource sharing (for
   else {
     next(); // Passes control to next (Swagger) handler
   }
+});
+
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'pug');
+
+app.use(logger('dev'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(function(req, res, next) {  // Enable cross origin resource sharing (for app frontend)
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,OPTIONS');
+  res.header('Access-Control-Allow-Credentials', 'true');
+  console.log("CORS");
+
+  // Prevents CORS preflight request (for PUT game_guess) from redirecting
+  if ('OPTIONS' == req.method) {
+    res.send(200);
+  }
+  else {
+    next(); // Passes control to next (Swagger) handler
+  }
+});
+
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.use('/', usersRouter);
+
+// catch 404 and forward to error handler
+app.use(function(req, res, next) {
+  next(createError(404));
 });
 
 // error handler
