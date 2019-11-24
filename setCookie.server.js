@@ -35,22 +35,6 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(function(req, res, next) {  // Enable cross origin resource sharing (for app frontend)
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
-  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,OPTIONS');
-  res.header('Access-Control-Allow-Credentials', 'true');
-  console.log("CORS");
-
-  // Prevents CORS preflight request (for PUT game_guess) from redirecting
-  if ('OPTIONS' == req.method) {
-    res.send(200);
-  }
-  else {
-    next(); // Passes control to next (Swagger) handler
-  }
-});
 
 app.use(express.static(path.join(__dirname, 'public')));
 
