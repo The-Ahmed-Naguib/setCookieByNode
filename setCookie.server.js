@@ -10,22 +10,22 @@ var port = 6060;
 
 var app = express();
 
-app.use(function(req, res, next) {  // Enable cross origin resource sharing (for app frontend)
-  res.header('Access-Control-Allow-Origin', 'http://localhost:8080');
-  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
-  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,OPTIONS');
-  res.header('Access-Control-Allow-Credentials', 'true');
-  console.log("CORS");
-
-  // Prevents CORS preflight request (for PUT game_guess) from redirecting
-  if ('OPTIONS' == req.method) {
-    res.send(200);
-  }
-  else {
-    next(); // Passes control to next (Swagger) handler
-  }
-});
+// app.use(function(req, res, next) {  // Enable cross origin resource sharing (for app frontend)
+//   res.header('Access-Control-Allow-Origin', 'http://localhost:8080');
+//   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,OPTIONS');
+//   res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+//   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,OPTIONS');
+//   res.header('Access-Control-Allow-Credentials', 'true');
+//   console.log("CORS");
+//
+//   // Prevents CORS preflight request (for PUT game_guess) from redirecting
+//   if ('OPTIONS' == req.method) {
+//     res.send(200);
+//   }
+//   else {
+//     next(); // Passes control to next (Swagger) handler
+//   }
+// });
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
