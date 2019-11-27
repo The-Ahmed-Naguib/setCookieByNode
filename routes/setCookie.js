@@ -7,7 +7,7 @@ router.post('/*', function(req, res, next) {
         // check the new cookie first
         freeUser = req.body['freeUser'];
     }
-    res.set('Set-cookie', 'freeUser=' + freeUser + ';SameSite=None;Secure;Path=/;Max-Age=86400');
+    res.set('Set-cookie', 'freeUser=' + freeUser + ';SameSite=None;Secure;domain=.siliconexpert.com;Path=/;Max-Age=86400');
     res.send({ "freeUser": freeUser });
 });
 
@@ -18,7 +18,7 @@ router.get('/*', function(req, res, next) {
         // check the new cookie first
         freeUser = req.body['freeUser'];
     }
-    res.set('Set-cookie', 'freeUser=' + freeUser + ';SameSite=None;Secure;Path=/;Max-Age=86400');
+    res.set('Set-cookie', 'freeUser=' + freeUser + ';SameSite=None;Secure;domain=.siliconexpert.com;Path=/;Max-Age=86400');
     res.send({ "freeUser": freeUser });
 });
 
